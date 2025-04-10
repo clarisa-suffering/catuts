@@ -23,10 +23,17 @@ class FlightController extends Controller
         $flight = Flight::with('ticket')->findOrFail($request->id);
 
         $tickets = $flight->ticket;
+        $countBoardings = $flight->ticket()->where('is_boarding', 1)->count();
+        $countPassengers = $flight->ticket()->count();
+
+
+
 
         return view('listTicket')
         ->with('flight', $flight)
-        ->with('tickets',$tickets);
+        ->with('tickets',$tickets)
+        ->with('countBoardings', $countBoardings)
+        ->with('countPassengers', $countPassengers);
     }
 
 }

@@ -1,12 +1,28 @@
 @extends('base')
 @section('content')
-<div>
+<div class="m-4">
     @if (session('success'))
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
         {{ session('success') }}
     </div>
     @endif
-<div class="relative overflow-x-auto">
+<div class="relative overflow-x-auto ">
+    <div>
+    <h1 class="font-semibold">Ticket details for {{$flight->flight_code}}</h1>
+    <h1 class="font-semibold">{{$countPassengers}} Passengers & {{$countBoardings}} Boardings</h1>
+    <hr>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 m-4">
+    <div class="flex items-center">
+        <p class="font-semibold text-gray-700 dark:text-gray-400">{{ $flight->origin }}->{{$flight->destination}}</p>
+    </div>
+    <div class="flex items-center">
+        <p class="font-semibold text-gray-700 dark:text-gray-400">Departure {{ \Carbon\Carbon::parse($flight->departure_time)->translatedFormat('l, d F Y H:i') }}</p>
+    </div>
+    <div class="flex items-center">
+        <p class="font-semibold text-gray-700 dark:text-gray-400">Arrival {{ \Carbon\Carbon::parse($flight->arrival_time)->translatedFormat('l, d F Y H:i') }}</p>
+    </div>
+</div>        
+    </div>
     {{-- table --}}
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
